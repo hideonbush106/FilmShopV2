@@ -16,7 +16,7 @@ import ColorModeContext from '~/contexts/ColorModeContext'
 import useAuth from '~/hooks/useAuth'
 
 const pages = ['Home', 'About', 'News', 'Contact']
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
+// const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 function Navigation() {
   const theme = useTheme()

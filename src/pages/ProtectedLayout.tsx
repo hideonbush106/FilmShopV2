@@ -1,5 +1,3 @@
-import React from 'react'
-
 const ProtectedLayout = () => {
   return <div>ProtectedLayout</div>
 }
