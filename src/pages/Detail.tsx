@@ -1,13 +1,30 @@
-import { listOfFilms } from '~/shared/ListOfFilms'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, Container, Typography } from '@mui/material'
 import { ArrowBack } from '@mui/icons-material'
+import { Film } from '~/global/interface'
+import React from 'react'
+import useListOfFilms from '~/hooks/api/useListOfFilms'
+import Loading from './Loading'
 
 const Detail = () => {
   const navigate = useNavigate()
   const { id } = useParams()
-  const film = listOfFilms.find((film) => film.id === Number(id))
-  return (
+  const [film, setFilm] = React.useState<Film>({})
+  const { getFilmById } = useListOfFilms()
+  const [loading, setLoading] = React.useState<boolean>(true)
+
+  React.useEffect(() => {
+    const fetchFilm = async () => {
+      const response = await getFilmById(id)
+      setFilm(response)
+      setLoading(false)
+    }
+    fetchFilm()
+  }, [getFilmById, id])
+
+  return loading ? (
+    <Loading />
+  ) : (
     <Container sx={{ display: 'flex', justifyContent: 'center', marginTop: '2rem', flexWrap: 'wrap-reverse' }}>
       <Box
         sx={{
@@ -19,12 +36,11 @@ const Detail = () => {
           justifyContent: 'center'
         }}
       >
-        <img src={`../../${film?.image}`} alt={film?.title} />
+        <img src={film?.image} alt={film?.title} />
       </Box>
       <Box sx={{ width: { sm: '60%', xs: '100%' } }}>
         <Button
           startIcon={<ArrowBack />}
-          variant='outlined'
           color='primary'
           onClick={() => {
             navigate('/')

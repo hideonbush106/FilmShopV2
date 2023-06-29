@@ -2,8 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material'
 import useTheme from '@mui/material/styles/useTheme'
 import { Info } from '@mui/icons-material'
-import { Film } from '~/shared/ListOfFilms'
-
+import { Film } from '~/global/interface'
 interface FilmPresentationProps {
   films: Film[]
 }
