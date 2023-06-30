@@ -109,16 +109,16 @@ const CreateFilmModal = (props: Props) => {
       </Box>
       <form method='POST' onSubmit={formik.handleSubmit}>
         <FormControl sx={{ width: '100%', px: 5, my: 2 }}>
-          <TextField
+          {/* <TextField
             sx={{ my: 1 }}
             onChange={handleChange}
             value={formik.values.id}
-            label='Film title'
+            label='Film ID'
             variant='standard'
             fullWidth
             name='id'
             type='number'
-          />
+          /> */}
           <TextField
             sx={{ my: 1 }}
             onChange={handleChange}

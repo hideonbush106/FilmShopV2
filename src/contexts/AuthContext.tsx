@@ -1,4 +1,4 @@
-import { User, UserInfo, UserMetadata, signInWithPopup, signOut } from 'firebase/auth'
+import { User, signInWithPopup, signOut } from 'firebase/auth'
 import React, { useEffect } from 'react'
 import { auth, provider } from '~/firebase'
 import Loading from '~/pages/Loading'
