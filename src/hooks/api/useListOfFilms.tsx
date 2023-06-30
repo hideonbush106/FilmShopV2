@@ -1,5 +1,6 @@
 import React from 'react'
 import useAPI from './useAPI'
+import { Film } from '~/global/interface'
 
 const useListOfFilms = () => {
   const callAPI = useAPI()
@@ -25,7 +26,43 @@ const useListOfFilms = () => {
     [callAPI]
   )
 
-  return { getFilms, getFilmById }
+  const editFilmById = React.useCallback(
+    async (id: string | undefined, data: Film) => {
+      try {
+        const response = await callAPI('put', `${rootEndpoint}/${id}`, {}, {}, data)
+        return response
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    [callAPI]
+  )
+
+  const createFilm = React.useCallback(
+    async (data: Film) => {
+      try {
+        const response = await callAPI('post', `${rootEndpoint}`, {}, {}, data)
+        return response
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    [callAPI]
+  )
+
+  const deleteFilmById = React.useCallback(
+    async (id: string | undefined) => {
+      try {
+        const response = await callAPI('delete', `${rootEndpoint}/${id}`)
+        return response
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    [callAPI]
+  )
+
+  return { getFilms, getFilmById, editFilmById, createFilm, deleteFilmById }
 }
 
 export default useListOfFilms

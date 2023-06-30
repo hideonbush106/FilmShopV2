@@ -39,23 +39,27 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <ColorModeContext.Provider value={colorMode}>
-          <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <AuthProvider>
+          <ColorModeContext.Provider value={colorMode}>
             <DataProvider>
               <Routes>
                 {routes.map((route, index) => (
                   <Route key={index} path={route.path} Component={route.component}>
                     {route.children?.map((child, index) => (
-                      <Route key={index} path={child.path} Component={child.component} />
+                      <Route key={index} path={child.path} Component={child.component}>
+                        {child.childrens?.map((child, index) => (
+                          <Route key={index} path={child.path} Component={child.component} />
+                        ))}
+                      </Route>
                     ))}
                   </Route>
                 ))}
               </Routes>
             </DataProvider>
-          </ThemeProvider>
-        </ColorModeContext.Provider>
-      </AuthProvider>
+          </ColorModeContext.Provider>
+        </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   )
 }

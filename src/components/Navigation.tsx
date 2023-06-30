@@ -11,7 +11,7 @@ import Button from '@mui/material/Button'
 import MenuItem from '@mui/material/MenuItem'
 import { Brightness4, Brightness7, Login, Movie } from '@mui/icons-material'
 import { Link, useNavigate } from 'react-router-dom'
-import { Avatar, Tooltip, useTheme } from '@mui/material'
+import { Avatar, Tooltip, useMediaQuery, useTheme } from '@mui/material'
 import ColorModeContext from '~/contexts/ColorModeContext'
 import useAuth from '~/hooks/useAuth'
 
@@ -25,7 +25,8 @@ function Navigation() {
   const navigate = useNavigate()
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null)
-
+  const xs = useMediaQuery(theme.breakpoints.down('xs'))
+  const sm = useMediaQuery(theme.breakpoints.down('sm'))
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
   }
@@ -40,9 +41,8 @@ function Navigation() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
-  console.log(userInfo)
   return (
-    <AppBar position='static'>
+    <AppBar position='static' color='secondary'>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <Movie sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -103,6 +103,9 @@ function Navigation() {
                   <Typography textAlign='center'>{page}</Typography>
                 </MenuItem>
               ))}
+              <MenuItem onClick={colorMode.toggleColorMode} color='inherit'>
+                {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+              </MenuItem>
             </Menu>
           </Box>
           <Movie sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -122,7 +125,7 @@ function Navigation() {
               textDecoration: 'none'
             }}
           >
-            FILMSHOP
+            FS
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -137,9 +140,11 @@ function Navigation() {
               </Button>
             ))}
           </Box>
-          <IconButton sx={{ mx: 1 }} onClick={colorMode.toggleColorMode} color='inherit'>
-            {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
-          </IconButton>
+          {xs || sm ? null : (
+            <IconButton sx={{ mx: 1 }} onClick={colorMode.toggleColorMode} color='inherit'>
+              {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+            </IconButton>
+          )}
           {userInfo ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title='Open settings'>
@@ -168,14 +173,21 @@ function Navigation() {
                     <Typography textAlign='center'>{setting}</Typography>
                   </MenuItem>
                 ))} */}
-                <MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    navigate('/profile')
+                    handleCloseUserMenu()
+                  }}
+                >
                   <Typography textAlign='center'>Profile</Typography>
                 </MenuItem>
-                <MenuItem>
-                  <Typography textAlign='center'>Profile</Typography>
-                </MenuItem>
-                <MenuItem>
-                  <Typography textAlign='center'>Profile</Typography>
+                <MenuItem
+                  onClick={() => {
+                    navigate('/film-mng')
+                    handleCloseUserMenu()
+                  }}
+                >
+                  <Typography textAlign='center'>Film Management</Typography>
                 </MenuItem>
                 <MenuItem onClick={logout}>
                   <Typography textAlign='center'>Logout</Typography>

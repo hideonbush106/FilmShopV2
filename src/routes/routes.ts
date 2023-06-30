@@ -5,6 +5,9 @@ import Main from '~/pages/Main'
 import Contact from '~/pages/Contact'
 import Login from '~/pages/Login'
 import Layout from '~/pages/Layout'
+import Profile from '~/pages/private/Profile'
+import ProtectedLayout from '~/pages/private/ProtectedLayout'
+import FilmManagement from '~/pages/private/FilmManagement'
 
 export const routes = [
   {
@@ -34,6 +37,26 @@ export const routes = [
       {
         path: '/contact',
         component: Contact
+      },
+      {
+        path: '/profile',
+        component: ProtectedLayout,
+        childrens: [
+          {
+            path: '/profile',
+            component: Profile
+          }
+        ]
+      },
+      {
+        path: '/film-mng',
+        component: ProtectedLayout,
+        childrens: [
+          {
+            path: '/film-mng',
+            component: FilmManagement
+          }
+        ]
       }
     ]
   }

@@ -1,12 +1,12 @@
 import { Box, Button, Typography } from '@mui/material'
 import GoogleButton from 'react-google-button'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import useAuth from '~/hooks/useAuth'
 
 const Login = () => {
   const navigate = useNavigate()
-  const { login } = useAuth()
-  return (
+  const { login, userInfo } = useAuth()
+  return !userInfo ? (
     <Box
       height={'100vh'}
       sx={{
@@ -32,13 +32,15 @@ const Login = () => {
     >
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <Typography
-          variant='h2'
+          variant='h3'
           sx={{
             fontFamily: `'Comfortaa', cursive`,
             zIndex: 9,
             color: 'white',
             fontWeight: 700,
-            letterSpacing: '.3rem'
+            letterSpacing: '.3rem',
+            textAlign: 'center',
+            fontSize: 'clamp(2rem, 5vw, 4rem)'
           }}
         >
           Welcome to FILMSHOP
@@ -55,6 +57,8 @@ const Login = () => {
         </Button>
       </Box>
     </Box>
+  ) : (
+    <Navigate to='/' />
   )
 }
 

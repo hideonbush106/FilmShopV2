@@ -19,17 +19,21 @@
     "@mui/lab": "^5.0.0-alpha.134",
     "@mui/material": "^5.13.6",
     "@mui/styled-engine-sc": "^5.12.0",
+    "@mui/x-data-grid": "^6.9.0",
     "axios": "^1.4.0",
     "firebase": "^9.23.0",
+    "formik": "^2.4.2",
     "markdown-to-jsx": "^7.2.1",
     "node-sass": "^9.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-google-button": "^0.7.2",
     "react-router-dom": "^6.14.0",
+    "react-toastify": "^9.1.3",
     "sass": "^1.63.6",
     "styled-components": "^5.3.11",
-    "vite-raw-plugin": "^1.0.2"
+    "vite-raw-plugin": "^1.0.2",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@types/node": "^20.2.5",
